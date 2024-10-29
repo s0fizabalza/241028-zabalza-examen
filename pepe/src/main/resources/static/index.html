@@ -1,0 +1,43 @@
+
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Pepe</title>
+    </head>
+    <body>
+    <h1>Pepe</h1>
+    <div id="mensajes"></div>
+    <input id="mensaje" type="text">
+    <button id="enviar">Enviar</button>
+
+    <script>
+        const socket = new WebSocket('ws://localhost:8080/websocket');
+
+        socket.onmessage = (event) => {
+            document.getElementById('mensajes').innerHTML += `<p>${event.data}</p>`;
+        };
+
+        socket.onopen = () => {
+            console.log('Conexión establecida');
+        };
+
+        socket.onclose = () => {
+            console.log('Conexión cerrada');
+        };
+
+        socket.onerror = (error) => {
+            console.log('Error:', error);
+        };
+
+        document.getElementById('enviar').addEventListener('click', () => {
+            const mensaje = document.getElementById('mensaje').value;
+            socket.send(mensaje);
+            document.getElementById('mensaje').value = '';
+        });
+    </script>
+
+    if (mensaje == "Websocket")
+
+    </body>
+    </html>
